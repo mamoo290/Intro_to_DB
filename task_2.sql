@@ -1,35 +1,40 @@
+-- Authors table
 CREATE TABLE Authors (
-    Author_ID INT PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL
+    author_id INT PRIMARY KEY,
+    author_name VARCHAR(100) NOT NULL
 );
 
+-- Books table
 CREATE TABLE Books (
-    Book_ID INT PRIMARY KEY,
-    Title VARCHAR(255) NOT NULL,
-    Author_ID INT NOT NULL,
-    Price DECIMAL(10,2),
-    FOREIGN KEY (Author_ID) REFERENCES Authors(Author_ID)
+    book_id INT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author_id INT NOT NULL,
+    price DECIMAL(10,2),
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
 );
 
+-- Customers table
 CREATE TABLE Customers (
-    Customer_ID INT PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
-    Email VARCHAR(100) UNIQUE NOT NULL
+    customer_id INT PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    customer_email VARCHAR(100) UNIQUE NOT NULL
 );
 
+-- Orders table
 CREATE TABLE Orders (
-    Order_ID INT PRIMARY KEY,
-    Customer_ID INT NOT NULL,
-    Order_Date DATE NOT NULL,
-    FOREIGN KEY (Customer_ID) REFERENCES Customers(Customer_ID)
+    order_id INT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    order_date DATE NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
+-- Order_Details table
 CREATE TABLE Order_Details (
-    Order_Detail_ID INT PRIMARY KEY,
-    Order_ID INT NOT NULL,
-    Book_ID INT NOT NULL,
-    Quantity INT NOT NULL,
-    FOREIGN KEY (Order_ID) REFERENCES Orders(Order_ID),
-    FOREIGN KEY (Book_ID) REFERENCES Books(Book_ID)
+    order_detail_id INT PRIMARY KEY,
+    order_id INT NOT NULL,
+    book_id INT NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
 
