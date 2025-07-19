@@ -1,46 +1,35 @@
-USE alx_book_store;
-
-DROP TABLE IF EXISTS Order_Details;
-DROP TABLE IF EXISTS Orders;
-DROP TABLE IF EXISTS Customers;
-DROP TABLE IF EXISTS Books;
-DROP TABLE IF EXISTS Authors;
-
 CREATE TABLE Authors (
-    author_id INT AUTO_INCREMENT PRIMARY KEY,
-    author_name VARCHAR(100) NOT NULL,
-    bio TEXT
+    Author_ID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE Books (
-    book_id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(200) NOT NULL,
-    author_id INT,
-    published_year YEAR,
-    price DECIMAL(8,2),
-    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+    Book_ID INT PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+    Author_ID INT NOT NULL,
+    Price DECIMAL(10,2),
+    FOREIGN KEY (Author_ID) REFERENCES Authors(Author_ID)
 );
 
 CREATE TABLE Customers (
-    customer_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE,
-    address VARCHAR(255)
+    Customer_ID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL
 );
 
 CREATE TABLE Orders (
-    order_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT NOT NULL,
-    order_date DATE,
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+    Order_ID INT PRIMARY KEY,
+    Customer_ID INT NOT NULL,
+    Order_Date DATE NOT NULL,
+    FOREIGN KEY (Customer_ID) REFERENCES Customers(Customer_ID)
 );
 
 CREATE TABLE Order_Details (
-    order_details_id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
-    book_id INT NOT NULL,
-    quantity INT NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-    FOREIGN KEY (book_id) REFERENCES Books(book_id)
+    Order_Detail_ID INT PRIMARY KEY,
+    Order_ID INT NOT NULL,
+    Book_ID INT NOT NULL,
+    Quantity INT NOT NULL,
+    FOREIGN KEY (Order_ID) REFERENCES Orders(Order_ID),
+    FOREIGN KEY (Book_ID) REFERENCES Books(Book_ID)
 );
 
